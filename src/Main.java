@@ -2,23 +2,35 @@ import exceptions.WrongLoginException;
 import exceptions.WrongPasswordException;
 
 public class Main {
-    public static void Security(String login, String password, String confirmPassword) {
+    public static void Security(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
         int maxSymbols = 20;
-        if (login.length() > maxSymbols || login.contains("Пароль") || login != "Wizardry_8") {
+        if (login.length() > maxSymbols) {
             throw new WrongLoginException();
-        } if (password.length() > maxSymbols || password.contains("Пароль") || password != "Left_4_Dead_2") {
+        } else if ( login.contains("Пароль!&?./'")) {
+            throw new WrongLoginException();
+        } else if (!login.equals("Wizardry_8")) {
+            throw new WrongLoginException();
+        }
+
+
+        if (password.length() > maxSymbols) {
             throw new WrongPasswordException();
-        }  if (password.equals(confirmPassword) == false) {
+        } else if (password.contains("Пароль!&?./'")) {
+            throw new WrongPasswordException();
+        } else if (!password.contains("Left_4_Dead_2")) {
+            throw new WrongPasswordException();
+        }
+
+
+        if (!password.equals(confirmPassword)) {
             throw new WrongPasswordException();
         }
     }
     public static void main(String[] args) {
         try {
             Security("Wizardry_8", "Left_4_Dead_2", "Left_4_Dead_2");
-        } catch (WrongLoginException e) {
-            throw new WrongLoginException();
-        } catch (WrongPasswordException e) {
-            throw new WrongPasswordException();
+        } catch (WrongLoginException | WrongPasswordException e) {
+            throw new RuntimeException(e);
         }
     }
 }
