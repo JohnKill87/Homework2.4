@@ -8,7 +8,7 @@ public class Main {
             throw new WrongLoginException();
         } else if ( login.contains("Пароль!&?./'")) {
             throw new WrongLoginException();
-        } else if (!login.equals("Wizardry_8")) {
+        } else if (!login.contains("ry_8")) {
             throw new WrongLoginException();
         }
 
@@ -17,7 +17,7 @@ public class Main {
             throw new WrongPasswordException();
         } else if (password.contains("Пароль!&?./'")) {
             throw new WrongPasswordException();
-        } else if (!password.contains("Left_4_Dead_2")) {
+        } else if (!password.contains("Left_4")) {
             throw new WrongPasswordException();
         }
 
@@ -28,7 +28,7 @@ public class Main {
     }
     public static void main(String[] args) {
         try {
-            Security("Wizardry_8", "Left_4_Dead_2", "Left_4_Dead_2");
+            Security("Wizard_ry_8", "Left_4_Dead_2", "Left_4_Dead_2");
         } catch (WrongLoginException | WrongPasswordException e) {
             throw new RuntimeException(e);
         }
