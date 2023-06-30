@@ -4,26 +4,17 @@ import exceptions.WrongPasswordException;
 public class Main {
     public static void Security(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
         int maxSymbols = 20;
+        String unacceptableSymbols ="^[a-zA-Z0-9-_]+$";
         if (login.length() > maxSymbols) {
             throw new WrongLoginException();
-        } else if (login.contains("'")
-                || login.contains("?")
-                || login.contains("@")
-                || login.contains("%")
-                || login.contains("&")
-                || login.contains("/")) {
+        } else if (!login.matches(unacceptableSymbols)){
             throw new WrongLoginException();
         }
 
 
         if (password.length() > maxSymbols) {
             throw new WrongPasswordException();
-        } else if (password.contains("'")
-                || password.contains("?")
-                || password.contains("@")
-                || password.contains("%")
-                || password.contains("&")
-                || password.contains("/")) {
+        } else if (!password.matches(unacceptableSymbols)) {
             throw new WrongPasswordException();
         }
 
